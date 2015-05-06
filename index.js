@@ -4,7 +4,7 @@ var http = require("http"),
     fs = require("fs"),
     mime = require('mime'),
     port = 80,
-    __appdir = '/var/www';
+    __appdir = '/var/www/roydelgado';
 
 http.createServer(function(request, response) {
 
