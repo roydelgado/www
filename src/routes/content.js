@@ -51,7 +51,7 @@ function ContentHandler (db) {
 
             if (err) return next(err);
 
-            if (!post) return res.redirect("/post_not_found");
+            if (!post) return res.redirect("/blog/post_not_found");
 
             // init comment form fields for additional comment
             var comment = {'name': req.username, 'body': "", 'email': ""}
@@ -86,7 +86,7 @@ function ContentHandler (db) {
 
                 if (err) return next(err);
 
-                if (!post) return res.redirect("/post_not_found");
+                if (!post) return res.redirect("/blog/post_not_found");
 
                 // init comment form fields for additional comment
                 var comment = {'name': name, 'body': "", 'email': ""}
@@ -110,9 +110,9 @@ function ContentHandler (db) {
 
             if (err) return next(err);
 
-            if (updated == 0) return res.redirect("/post_not_found");
+            if (updated == 0) return res.redirect("/blog/post_not_found");
 
-            return res.redirect("/post/" + permalink);
+            return res.redirect("/blog/post/" + permalink);
         });
     }
 
@@ -124,7 +124,7 @@ function ContentHandler (db) {
     this.displayNewPostPage = function(req, res, next) {
         "use strict";
 
-        if (!req.username) return res.redirect("/login");
+        if (!req.username) return res.redirect("/blog/login");
 
         return res.render('newpost_template', {
             subject: "",
@@ -158,7 +158,7 @@ function ContentHandler (db) {
         var post = req.body.body
         var tags = req.body.tags
 
-        if (!req.username) return res.redirect("/signup");
+        if (!req.username) return res.redirect("/blog/signup");
 
         if (!title || !post) {
             var errors = "Post must contain a title and blog entry";
@@ -179,7 +179,7 @@ function ContentHandler (db) {
             if (err) return next(err);
 
             // now redirect to the blog permalink
-            return res.redirect("/post/" + permalink)
+            return res.redirect("/blog/post/" + permalink)
         });
     }
 }

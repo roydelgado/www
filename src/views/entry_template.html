@@ -7,11 +7,11 @@ Blog Post
 </head>
 <body>
 {% if username %}
-Welcome {{username}}        <a href="/logout">Logout</a> | <a href="/newpost">New Post</a><p>
+Welcome {{username}}        <a href="/blog/logout">Logout</a> | <a href="/blog/newpost">New Post</a><p>
 {% else %}
-You are not logged in!        <a href="/login">Login</a> | <a href="/signup">Sign Up</a><p>
+You are not logged in!        <a href="/blog/login">Login</a> | <a href="/blog/signup">Sign Up</a><p>
 {% endif %}
-<a href="/">Blog Home</a><br><br>
+<a href="/blog">Blog Home</a><br><br>
 
 <h2>{{post['title']}}</h2>
 Posted {{post['date']}}<i> By {{post['author']}}</i><br>
@@ -23,9 +23,9 @@ Posted {{post['date']}}<i> By {{post['author']}}</i><br>
 <em>Filed Under</em>:
 {% for tag in post.tags %}
     {% if loop.first %}
-        <a href="/tag/{{tag}}">{{tag}}</a>
+        <a href="/blog/tag/{{tag}}">{{tag}}</a>
     {% else %}
-        , <a href="/tag/{{tag}}">{{tag}}</a>
+        , <a href="/blog/tag/{{tag}}">{{tag}}</a>
     {% endif %}
 {% endfor %}
 <p>
@@ -37,7 +37,7 @@ Author: {{comment['author']}}<br>
 <hr>
 {% endfor %}
 <h3>Add a comment</h3>
-<form action="/newcomment" method="POST">
+<form action="/blog/newcomment" method="POST">
 <input type="hidden" name="permalink", value="{{post['permalink']}}">
 <h4>{{errors}}</h4>
 <b>Name</b> (required)<br>
@@ -50,5 +50,3 @@ Author: {{comment['author']}}<br>
 </ul>
 </body>
 </html>
-
-

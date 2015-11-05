@@ -55,7 +55,7 @@ function SessionHandler (db) {
                 if (err) return next(err);
 
                 res.cookie('session', session_id);
-                return res.redirect('/welcome');
+                return res.redirect('/blog/welcome');
             });
         });
     }
@@ -69,7 +69,7 @@ function SessionHandler (db) {
 
             // Even if the user wasn't logged in, redirect to home
             res.cookie('session', '');
-            return res.redirect('/');
+            return res.redirect('/blog');
         });
     }
 
@@ -147,7 +147,7 @@ function SessionHandler (db) {
                     if (err) return next(err);
 
                     res.cookie('session', session_id);
-                    return res.redirect('/welcome');
+                    return res.redirect('/blog/welcome');
                 });
             });
         }
@@ -162,7 +162,7 @@ function SessionHandler (db) {
         console.log('---- welcome request: ----', req.username)
         if (!req.username) {
             console.log("welcome: can't identify user...redirecting to signup");
-            return res.redirect("/signup");
+            return res.redirect("/blog/signup");
         }
 
         return res.render("welcome", {'username':req.username})

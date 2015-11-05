@@ -1,14 +1,17 @@
+//all require operations are synchronous,
+//so avoid using it if unnecessary (ie. each incoming http request)
 var express = require('express')
   , app = express()
   , cons = require('consolidate') // templating library adapter for Express
   , MongoClient = require('mongodb').MongoClient 
   , routes = require('./src/routes')
-  , fs = require('fs')
-  , path = require('path')
-  , mime = require('mime')
-  , ChatServer = require('./src/lib/chat_server') ;
+  // , fs = require('fs')
+  // , path = require('path')
+  //, mime = require('mime')
+  , ChatServer = require('./src/lib/chat_server')
+  , http = require('http') ;
 
-
+//extras
 var port = process.env.PORT || 4321
   , server;
 
@@ -37,5 +40,4 @@ MongoClient.connect('mongodb://localhost:27017/blog', function(err, db) {
 
     ChatServer.listen(server);
     console.log('SocketIO initialized for /chat');
-
 });

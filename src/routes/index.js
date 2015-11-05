@@ -2,7 +2,8 @@ var SessionHandler = require('./session')
   , ContentHandler = require('./content')
   , ChatHandler = require('./chat')
   , ErrorHandler = require('./error').errorHandler
-  , Caching = require('./caching') ;
+  , Caching = require('./caching')
+  , FXR = require('../lib/fxr.js') ;
 
 module.exports = exports = function(app, db) {
 
@@ -62,6 +63,22 @@ module.exports = exports = function(app, db) {
             }
         });
     })
+    
+    //foreign exchange rate using GET variables
+    app.get('/fxr/:amount/:to', function(req, res) {
+        var to = req.params.to.toUpperCase() || "AUD"
+         ,  amount = (isNaN(req.params.amount) || req.params.amount < 0) ? 0 : req.params.amount
+         ,  result = FXR.convertUSDToCurrency(amount, to);
+
+        res.render('fxr', {
+            currency : {
+                from: "USD",
+                to: to,
+                amount: amount,
+                result: result
+            }
+        });
+    });
 
     //chat
     app.get('/chat', chatHandler.displayChatPage);
