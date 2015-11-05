@@ -4,7 +4,8 @@ var socketio = require('socket.io')
   , nicknames = {}
   , usedNicknames = []
   , currentRoom = {}
-  , availableRooms = {};
+  , visibleRooms = {}
+  , filteredRooms = {};
 
 
 exports.listen = function(server) {
@@ -30,11 +31,11 @@ exports.listen = function(server) {
             //console.log('rooms available', io.sockets.adapter.rooms);
             var adapterRooms = io.sockets.adapter.rooms;
             for (var r in adapterRooms) {
-                if (adapterRooms[r]['__isVisible']) {
-                    availableRooms[r] = adapterRooms[r];
+                if (visibleRooms[r]) {
+                    filteredRooms[r] = adapterRooms[r];
                 }
             }
-            socket.emit('rooms', availableRooms);
+            socket.emit('rooms', filteredRooms);
         });
         //cleanup logic when user disconnects
         handleClientDisconnection(socket, nicknames, usedNicknames);
@@ -67,7 +68,7 @@ function joinRoom(socket, room) {
     //console.log(socket.id,'joinRoom ->', room)
     socket.join(room);
     currentRoom[socket.id] = room;
-    io.sockets.adapter.rooms[room]['__isVisible'] = true;
+    visibleRooms[room] = true;
     //let the user know the new room and notify other users in same room
     socket.emit('joinResult', {
         room: room
@@ -78,6 +79,7 @@ function joinRoom(socket, room) {
     //check if there's any other users in room and notify new user
     //old <1.0
     //let usersInRoom = io.sockets.clients(room)
+    //console.log(visibleRooms);
     let usersInRoom = Object.keys(io.sockets.adapter.rooms[room]);
     // console.log('users in room------------\n', usersInRoom);
     if (usersInRoom.length > 1) {
@@ -86,7 +88,6 @@ function joinRoom(socket, room) {
         for (let i in usersInRoom) {
             userSocketId = usersInRoom[i];
             // console.log('iterating users----------\n', userSocketId);
-            //usersInRoomList += (i > 0) ? '.' : nicknames[userSocketId] + ',' ;
             if (userSocketId !== socket.id) {
                 if (i > 0) {
                     usersInRoomList += ', ';
