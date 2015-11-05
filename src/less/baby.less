@@ -1,0 +1,289 @@
+@import url(http://fonts.googleapis.com/css?family=Elsie:900|Happy+Monkey);
+
+//kudos a Alan Espinoza A por pulir
+//and davidwalsh.name for the bg animation tut
+@-webkit-keyframes cloudy{.cloudy();};
+@-moz-keyframes cloudy{.cloudy();};
+@-ms-keyframes cloudy{.cloudy();};
+@-o-keyframes cloudy{.cloudy();};
+@keyframes cloudy{.cloudy();};
+
+.cloudy(){
+    from { background-position: 0 0; }
+    to { background-position: 1000px 0; }
+}
+
+//stork flying
+@-webkit-keyframes fly{.fly();};
+@-moz-keyframes fly{.fly();};
+@-ms-keyframes fly{.fly();};
+@-o-keyframes fly{.fly();};
+@keyframes fly{.fly();};
+
+.fly() {
+    from { background-position: 0 0; }
+    to { background-position: -800px 0; }
+}
+
+//stork moving
+@-webkit-keyframes updown{.updown();};
+@-moz-keyframes updown{.updown();};
+@-ms-keyframes updown{.updown();};
+@-o-keyframes updown{.updown();};
+@keyframes updown{.updown();};
+
+.updown() {
+    from { top: 20px; }
+    to { top: -20px; }
+}
+
+//  end animation
+.createAnimations(@descr){
+    -ms-animation: @descr;
+    -moz-animation: @descr;
+    -webkit-animation: @descr;
+    animation: @descr;
+}
+
+.shadow(@descr){
+    -webkit-box-shadow: @descr;
+    box-shadow: @descr;
+}
+
+
+@lime-green: #dbe688;
+
+.rotate(@deg){
+    -ms-transform: rotate(@deg);
+    -webkit-transform: rotate(@deg);
+    transform: rotate(@deg);
+}
+
+.ltrCreator(@letter){
+    .ltr-@{letter}:after {
+        content: '@{letter}';
+    }
+}
+
+// https://i.warosu.org/data/biz/img/0002/49/1396207995389.png ------------
+
+body {
+    margin: 0;
+    background-color: @lime-green;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+header {
+    font-family: 'Elsie', cursive;
+    text-align: center;
+    height: 130px;
+    width: 100%;
+    background-color: @lime-green;
+    .shadow(0px 5px 10px 0 #dbe688);
+}
+section, footer {
+    font-family: 'Happy Monkey', cursive;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    padding-top: 1em;
+}
+
+.eta {
+    position: relative;
+    left: 115px;
+    font-size: 2.1em;
+    color: #009cde;
+    top: -0.1em
+}
+
+.clouds {
+    background-image: url('/img/clouds.png');
+    background-position: 0px 0px;
+    background-repeat: repeat-x;
+    .createAnimations(cloudy 10s linear infinite);
+}
+
+.abc-blocks{
+    display: inline-block;
+    position: relative;
+    background-color: #fff;
+    border-radius: 5px;
+    background-clip: padding-box;
+    width: 52px;
+    height: 52px;
+    line-height:52px;
+    vertical-align: middle;
+    border: 12px solid;
+    font-size: 28px;
+    text-transform: uppercase;
+    .shadow(5px 5px 30px #777);
+}
+
+.orange {
+    color: #f93;
+}
+.light-green {
+    color: #9c9;
+}
+.purple {
+    color: #99c;
+}
+.baby-blue {
+    color: #79b5e3;
+}
+
+.ltrCreator(a);
+.ltrCreator(b);
+.ltrCreator(e);
+.ltrCreator(y);
+
+.ltr-b:first-child {
+    .rotate(-10deg);
+    left:10px;
+    margin-left: 30px;
+}
+.ltr-a,
+.ltr-e {
+    .rotate(15deg);
+    left: -10px;
+    top: 1em;
+}
+.ltr-b {
+    left: -20px;
+    .rotate(-3deg);
+}
+.ltr-y,
+.ltr-e:nth-child(4) {
+    .rotate(5deg);
+    left: -30px;
+    top: 0.7em;
+}
+
+section {
+    max-width: 1000px;
+    padding: 160px 20px 1.4em 20px;
+    margin: 0 auto;
+}
+
+section:after {
+    content: '';
+    clear: both;
+    display: block;
+}
+aside {
+    overflow: hidden;
+}
+aside, article {
+    float: left;
+    width: 50%;
+}
+
+.stork{
+    position: relative;
+    margin: 0 auto;
+    width:  400px;
+    height: 300px;
+    background: url('/img/stork.png') 0 0;
+    .createAnimations(fly 1.3s steps(2) infinite, updown 1s linear infinite alternate;)
+}
+
+.cloud-msg {
+    //width: 440px;
+    height: 300px;
+    margin: 0 auto;
+    background: url('/img/msg.png') center no-repeat;
+    p {
+        padding: 70px 115px 0 100px;
+        max-width: 320px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    a, a:visited {
+        color: #009cde;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+footer:before {
+    content: '';
+    display: block;
+    position: relative;
+    .shadow(0 10px 6px 2px #b6dfb1);
+}
+
+//kudos to http://lea.verou.me/
+footer {
+    background-color: #79d0a6;
+    background-image:
+        radial-gradient(#b6dfb1 25%, transparent 0),
+        radial-gradient(#b6dfb1 25%, transparent 0);
+    background-size: 90px 90px;
+    background-position: 0px 25px,45px 85px;
+    min-height: 66px;
+    text-align: center;
+    p {
+        padding-top: 0.55em;
+        font-size: 2em;
+        color: #939;
+    }
+
+}
+
+@media (max-width: 880px) {
+    aside, article {
+        float: none;
+        display: block;
+        width:100%;
+    }
+    .stork {
+        z-index: -1;
+    }
+}
+
+@media (max-width: 720px) and (orientation: portrait){
+    .abc-blocks {
+        width: 35px;
+        height: 35px;
+        line-height:  35px;
+    }
+    .eta {
+        left: 37px;
+        top: 0.5em;
+        font-size: 1.8em;
+    }
+    section {
+        padding: 160px 0 0 0;
+    }
+    .stork {
+        //width: 100%;
+    }
+    article, .cloud-msg {
+        //width: 100%;
+    }
+    .cloud-msg {
+        p {
+            padding-left:  15px;
+            padding-right: 15px;
+        }
+        p:last-child {
+            left: 60px;
+            top: -5px;
+        }
+    }
+}
+
+@media (max-width: 320px) and (orientation: portrait){
+    .stork {
+        max-width:  320px;
+    }
+    .cloud-msg {
+        background-size: 144%;
+    }
+}

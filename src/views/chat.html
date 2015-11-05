@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chatty Chat</title>
+  <link rel="stylesheet" type="text/css" href="/css/chat.css" />
+</head>
+<body>
+    <section class="content">
+        <section id="room" class="room"></section>
+        <section id="room-list" class="room-list"></section>
+        <section id="messages" class="messages"></section>
+        <form id='chat-form'>
+            <input id="chat-form__msg" class="chat-form__msg"/>
+            <input id="chat-form__btn" class="chat-form__btn" type="submit" value="Send" />
+            <section class="chat-form__help">
+                <ul>
+                    <li>Change nickname: <code>/nick [username]</code></li>
+                    <li>Join/create room: <code>/join [room name]</code></li>
+                </ul>
+            </section>
+        </form>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="/js/chat.js"></script>
+</body>
+</html>

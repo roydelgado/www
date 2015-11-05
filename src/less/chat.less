@@ -1,0 +1,57 @@
+body {
+    padding: 50px;
+    @media(max-width: 720px) {
+        padding: 15px;
+    }
+}
+
+a {
+    color: #0bf;
+}
+
+.content {
+    width: 80%;
+    margin: 0 auto;
+    @media(max-width: 720px) {
+        width: 95%;
+    }
+}
+
+.room {
+    background-color: #ddd;
+    margin-bottom: 1em;
+}
+
+.messages {
+    height: 300px;
+    overflow: auto;
+    background-color: #eee;
+    margin-bottom: 1em;
+}
+
+.room-list {
+    float: right;
+    width: 20%;
+    height: 300px;
+    overflow: auto;
+    background-color: #ddd;
+    div {
+        border-botton: 1px solid #eee;
+        &:hover {
+            background-color: #ccc;
+        }
+    }
+}
+.chat-form {
+    &__msg {
+        width:100%;
+        margin-bottom: 1em;
+    }
+    &__help {
+        font: 11px 'Lucida Grande', Helvetica, sans-serif;
+        ul {
+            margin: 1em 0 1em 1em;
+            padding: 0;
+        }
+    }
+}
