@@ -47,7 +47,6 @@ module.exports = exports = function(app, db) {
 
     //stork animation a.k.a. baby shower invitation
     app.get('/baby', function(req, res) {
-
         cachingHandler.getPageFromCache(req.url, function(err, content) {
             if (err) return req.next(err);
 
@@ -63,7 +62,7 @@ module.exports = exports = function(app, db) {
             }
         });
     })
-    
+
     //foreign exchange rate using GET variables
     app.get('/fxr/:amount/:to', function(req, res) {
         var to = req.params.to.toUpperCase() || "AUD"

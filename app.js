@@ -3,11 +3,8 @@
 var express = require('express')
   , app = express()
   , cons = require('consolidate') // templating library adapter for Express
-  , MongoClient = require('mongodb').MongoClient 
+  , MongoClient = require('mongodb').MongoClient
   , routes = require('./src/routes')
-  // , fs = require('fs')
-  // , path = require('path')
-  //, mime = require('mime')
   , ChatServer = require('./src/lib/chat_server')
   , http = require('http') ;
 
@@ -18,7 +15,8 @@ var port = process.env.PORT || 4321
 MongoClient.connect('mongodb://localhost:27017/blog', function(err, db) {
     "use strict";
     if (err) throw err;
-
+    //gzip
+    app.use(express.compress());
     //serve public files
     app.use(express.static(__dirname + '/public'));
     // Register our templating engine
