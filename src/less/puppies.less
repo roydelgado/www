@@ -1,0 +1,60 @@
+@puppies:'http://cdn-www.dailypuppy.com/media/dogs/anonymous/20780/20090227255719_P1020151cropped.jpg_w450.jpg',
+         'https://upload.wikimedia.org/wikipedia/commons/c/c5/Fox_Terrier_Wire_Puppy_2.jpg',
+         'https://upload.wikimedia.org/wikipedia/commons/d/d6/Chocolate_Lab_Puppy.JPG',
+         'https://upload.wikimedia.org/wikipedia/commons/4/41/Thegang.JPG',
+         'http://providence.freeadsinus.com/content/petomemorise-yahoo-com/images/200912/f20091201185420-bu.jpg';
+
+@puppies-length: length(@puppies);
+
+.slideshowImages(@n, @i: 1) when (@i <= @n) {
+
+    @item: extract(@puppies, (@i));
+
+    &--@{i} {
+        background: url(@item) center center no-repeat;
+        background-size: cover;
+    }
+
+    .slideshowImages(@n, (@i+1));
+}
+
+
+.transform3d(@x: 0, @y: 0, @z: 0){
+    -webkit-transform: translate3d(@x, @y, @z);
+    -moz-transform: translate3d(@x, @y, @z);
+    -ms-transform: translate3d(@x, @y, @z);
+    -o-transform: translate3d(@x, @y, @z);
+    transform: translate3d(@x, @y, @z);
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background: #777;
+}
+
+.slideshow {
+    width: 100%;
+    height: 100%;
+    //remove any gaps
+    white-space: nowrap;
+    font-size: 0;
+    .transform3d();
+    &--animate {
+        -webkit-transition: all .3s ease-out;
+        -moz-transition: all .3s ease-out;
+        -ms-transition: all .3s ease-out;
+        -o-transition: all .3s ease-out;
+        transition: all .3s ease-out;
+    }
+    &__slide {
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        .slideshowImages(@puppies-length);
+    }
+}

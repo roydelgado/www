@@ -12,7 +12,8 @@ module.exports = function(grunt) {
                 files: {
                     'public/css/styles.css': 'src/less/styles.less',
                     'public/css/baby.css': 'src/less/baby.less',
-                    'public/css/chat.css': 'src/less/chat.less' 
+                    'public/css/chat.css': 'src/less/chat.less',
+                    'public/css/puppies.css': 'src/less/puppies.less'
                 }
             }
         },

@@ -82,6 +82,11 @@ module.exports = exports = function(app, db) {
     //chat
     app.get('/chat', chatHandler.displayChatPage);
 
+    //hardware accelerated css
+    app.get('/puppies', function (req, res) {
+        res.render('puppies');
+    });
+
     //just testing stuff
     app.get('/', function(req, res) {
         res.writeHead(200, {'Content-Type': 'text/plain'});
