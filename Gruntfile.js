@@ -13,14 +13,16 @@ module.exports = function(grunt) {
                     'public/css/styles.css': 'src/less/styles.less',
                     'public/css/baby.css': 'src/less/baby.less',
                     'public/css/chat.css': 'src/less/chat.less',
-                    'public/css/puppies.css': 'src/less/puppies.less'
+                    'public/css/puppies.css': 'src/less/puppies.less',
+                    'public/css/bbc.css': 'src/less/bbc.less'
                 }
             }
         },
         uglify: {
             my_target: {
                 files: {
-                  'public/js/chat.js': ['src/js/chat_app.js', 'src/js/chat_ui.js', 'src/js/chat_socketio.js']
+                  'public/js/chat.js': ['src/js/chat_app.js', 'src/js/chat_ui.js', 'src/js/chat_socketio.js'],
+                  'public/js/bbc.js' : 'src/js/bbc.js'
                 }
             }
         },

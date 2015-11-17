@@ -93,6 +93,16 @@ module.exports = exports = function(app, db) {
         res.end('Hola from roydelgado.com');
     });
 
+    app.get('/bbc', function (req, res) {
+        res.render('bbc');
+    });
+
     // Error handling middleware
     app.use(ErrorHandler);
+
+    app.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
 }

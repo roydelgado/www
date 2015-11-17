@@ -1,0 +1,1 @@
+body{margin:0}.albums{text-align:center;border-collapse:collapse}.albums tr:nth-child(even){background-color:#ddd}.albums__cover{width:100px}.album-editor{position:fixed;margin:0 auto;top:25%;left:15%;background-color:#fff;padding:1em;border:1px solid black;display:none}.album-editor input{display:block;margin:.5em 0 1em 0}

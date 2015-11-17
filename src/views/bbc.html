@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BBC AJAX</title>
+  <link rel="stylesheet" type="text/css" href="/css/bbc.css" />
+</head>
+<body>
+    <main>
+        <h1>BBC AJAX Test</h1>
+        <section class="results">
+            <p>Fetching playlist...</p>
+        </section>
+        <form id="record-editor" class="album-editor" method="POST">
+            Cover Image URL: <input id="cover" value=""/>
+            Artist: <input id="artist" value=""/>
+            Title: <input id="title" value=""/>
+            Playlist: <input id="playlist" value=""/>
+            Label: <input id="label" value=""/>
+            <input type="submit" value="Save"/>
+            <p><a id="editor-close" href="#">close</a>
+        </form>
+    </main>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="/js/bbc.js"></script>
+</body>
+</html>

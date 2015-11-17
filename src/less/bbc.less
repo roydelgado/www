@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+}
+
+.albums {
+    text-align: center;
+    border-collapse: collapse;
+    tr:nth-child(even) {
+        background-color: #ddd;
+    }
+    &__cover {
+        width: 100px;
+    }
+}
+
+.album-editor {
+    position: fixed;
+    margin: 0 auto;
+    top: 25%;
+    left: 15%;
+    background-color: #fff;
+    padding: 1em;
+    border: 1px solid black;
+    display: none;
+    input {
+        display: block;
+        margin: 0.5em 0 1em 0;
+    }
+}
