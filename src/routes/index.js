@@ -3,16 +3,17 @@ var SessionHandler = require('./session')
   , ChatHandler = require('./chat')
   , ErrorHandler = require('./error').errorHandler
   , Caching = require('./caching')
-  , FXR = require('../lib/fxr.js') ;
+  , FXR = require('../lib/fxr.js');
 
-module.exports = exports = function(app, db) {
+// failsafe to maintain the reference between module.exports and exports
+module.exports = exports = function (app, db) {
 
     var sessionHandler = new SessionHandler(db)
       , contentHandler = new ContentHandler(db)
       , chatHandler = new ChatHandler()
       , cachingHandler = new Caching();
 
-    //mongo101 =================================
+    // mongo101 =================================
     // Middleware to see if a user is logged in
     app.use(sessionHandler.isLoggedInMiddleware);
 
@@ -45,15 +46,15 @@ module.exports = exports = function(app, db) {
     app.get('/blog/signup', sessionHandler.displaySignupPage);
     app.post('/blog/signup', sessionHandler.handleSignup);
 
-    //stork animation a.k.a. baby shower invitation
-    app.get('/baby', function(req, res) {
-        cachingHandler.getPageFromCache(req.url, function(err, content) {
+    // stork animation a.k.a. baby shower invitation
+    app.get('/baby', function (req, res) {
+        cachingHandler.getPageFromCache(req.url, function (err, content) {
             if (err) return req.next(err);
 
             if (content) {
                 res.send(content);
             } else {
-                res.render('baby', function(err, content) {
+                res.render('baby', function (err, content) {
                     // render handler
                     if (err) return req.next(err);
                     cachingHandler.setPageToCache(req.url, content);
@@ -63,32 +64,33 @@ module.exports = exports = function(app, db) {
         });
     })
 
-    //foreign exchange rate using GET variables
-    app.get('/fxr/:amount/:to', function(req, res) {
-        var to = req.params.to.toUpperCase() || "AUD"
-         ,  amount = (isNaN(req.params.amount) || req.params.amount < 0) ? 0 : req.params.amount
-         ,  result = FXR.convertUSDToCurrency(amount, to);
+    // foreign exchange rate using GET variables
+    app.get('/fxr/:amount/:to', function (req, res) {
+        var to = req.params.to.toUpperCase() || 'AUD'
+         ,  amount = (isNaN(req.params.amount) || req.params.amount < 0) ? 0 : req.params.amount;
 
-        res.render('fxr', {
-            currency : {
-                from: "USD",
-                to: to,
-                amount: amount,
-                result: result
-            }
+        FXR.convertUSDToCurrency(amount, to, function(result) {
+            res.render('fxr', {
+                currency : {
+                    from: 'USD',
+                    to: to,
+                    amount: amount,
+                    result: result
+                }
+            });
         });
     });
 
-    //chat
+    // chat
     app.get('/chat', chatHandler.displayChatPage);
 
-    //hardware accelerated css
+    // hardware accelerated css
     app.get('/puppies', function (req, res) {
         res.render('puppies');
     });
 
-    //just testing stuff
-    app.get('/', function(req, res) {
+    // just testing stuff
+    app.get('/', function (req, res) {
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end('Hola from roydelgado.com');
     });
@@ -100,9 +102,9 @@ module.exports = exports = function(app, db) {
     // Error handling middleware
     app.use(ErrorHandler);
 
-    app.use(function(req, res, next) {
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    app.use(function (req, res, next) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         next();
     });
 }

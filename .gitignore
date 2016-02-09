@@ -1,1 +1,10 @@
 node_modules/
+logs
+*.log
+npm-debug.log*
+.npm
+.node_repl_history
+.grunt
+pids
+*.pid
+*.seed
